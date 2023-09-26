@@ -143,6 +143,19 @@ document.querySelectorAll('.js-add-to-cart-button')
         });
       }
 
+      //  CALCULATE TOTAL QUANTITY
+      //  -   after we update our cart
+      //  -   we are going to calculate the total quantity
+
+      //  create variable to store the Total Quantity
+      let cartQuantity = 0;
+
+      //  - by looping through the cart
+      //  -   we are gonna add the myQuantity quantity to the cartQuantity
+      cart.forEach((myQuantity)=>{
+        cartQuantity += myQuantity.quantity;
+      });
+      console.log(cartQuantity);
       /*
         //  add the variable button to the cart
         //  using push to add it on the cart array
@@ -152,6 +165,10 @@ document.querySelectorAll('.js-add-to-cart-button')
           quantity: 1
         });
       */
+
+      //  Add the CartQuantity to the webpage by using DOM
+      document.querySelector('.js-cart-quantity')
+        .innerHTML = cartQuantity;
       
       console.log(cart);
     });
