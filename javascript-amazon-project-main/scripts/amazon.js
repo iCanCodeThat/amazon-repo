@@ -97,7 +97,7 @@ products.forEach((arrProduct)=>{
         Added
       </div>
 
-      <button class="add-to-cart-button button-primary">
+      <button class="add-to-cart-button button-primary js-add-to-cart-button" data-product-id = "${arrProduct.id}">
         Add to Cart
       </button>
     </div>
@@ -110,3 +110,60 @@ products.forEach((arrProduct)=>{
 
 document.querySelector('.js-products-grid')
   .innerHTML = productsHTML;
+
+
+//  ADD PRODUCTS TO THE CART
+//  instead of querySelector
+//  we will use querySelectorAll to give us the list of all the add to cart button in the page
+document.querySelectorAll('.js-add-to-cart-button')
+  .forEach((button)=>{  // use foreach because it is a list
+    button.addEventListener('click', ()=>{
+      //  DataSet
+      //  gives us all the data attributes attached to a certain element
+      const productId = button.dataset.productId;
+      
+      //  variable to store the matching item
+      let matchingItem;
+
+      //  check if the productName is already in the cart
+      cart.forEach((item)=>{
+        if(productId === item.productId){
+          matchingItem = item;  //if we find a matching item, where gonna save it to the global variable
+        }
+      });
+      //  if we did find a matching item, it will be an object
+      //  which is a truthy value
+      if(matchingItem){
+        matchingItem.quantity+=1;
+      } //  if the product is not in the cart, we will add it on the cart
+      else {
+        cart.push({
+          productId: productId,
+          quantity: 1
+        });
+      }
+
+      /*
+        //  add the variable button to the cart
+        //  using push to add it on the cart array
+        //  we will push an object
+        cart.push({
+          productName: productName,
+          quantity: 1
+        });
+      */
+      
+      console.log(cart);
+    });
+  });
+
+
+
+
+  //  Data Attribute
+  //  -   just another html attribute
+  //  -   allows us to attach any information to an element
+
+  //  Syntax Rule for Data Attribute
+  //  -   just an html attribute
+  //  -   have to start with "data-"
