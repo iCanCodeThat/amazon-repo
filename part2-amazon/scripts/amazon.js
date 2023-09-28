@@ -148,6 +148,8 @@ function updateCartQuantity(){
   
   console.log(cart);
 }
+//  call here
+updateCartQuantity();
 
 //  ADD PRODUCTS TO THE CART
 //  instead of querySelector

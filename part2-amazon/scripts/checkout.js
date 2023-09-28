@@ -115,5 +115,21 @@ document.querySelectorAll('.js-delete-link')
       const container = document.querySelector(`.js-cart-item-container-${productId}`);
 
       container.remove();
-    });
+
+      //  call checkout total here
+      updateCartQuantity();
   });
+});
+
+//  Checkout Total
+function updateCartQuantity(){
+  let cartQuantity = 0;
+  cart.forEach((cartItem) => {
+    cartQuantity += cartItem.quantity;
+  });
+
+  document.querySelector('.js-link-to-home-link')
+    .innerHTML = `${cartQuantity} items`;
+}
+updateCartQuantity()
+
