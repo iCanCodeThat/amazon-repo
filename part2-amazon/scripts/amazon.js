@@ -1,5 +1,6 @@
 import { cart, addToCart } from "../data/cart.js";  //  import the cart
 import { products } from "../data/products.js";
+import { formatCurrency } from "./utils/calculate.js";
 //  we can rename it such as "cart as myCart" to avoid naming conflict
 
 //  To Save the Data
@@ -76,7 +77,7 @@ products.forEach((arrProduct)=>{
       </div>
 
       <div class="product-price">
-        $${(arrProduct.priceCents / 100).toFixed(2)} 
+        $${formatCurrency(arrProduct.priceCents)} 
       </div>
 
       <div class="product-quantity-container">
