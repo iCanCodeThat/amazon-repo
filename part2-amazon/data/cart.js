@@ -1,4 +1,4 @@
-export const cart = [{
+export let cart = [{
   productId: 'e43638ce-6aa0-4b85-b27f-e1d07eb678c6',
   quantity: 2
 },{
@@ -29,4 +29,18 @@ export function addToCart(productId){
       quantity: 1
     });
   }
+}
+
+export function removeProductFromCart(productId){  
+  //  create new array
+  const newCart = [];
+  //  Loop through the cart
+  cart.forEach((cartItem)=>{
+    //  add each product to the new array, except for the productId
+    if(cartItem.productId !== productId){
+      newCart.push(cartItem); //  result is that it gonna contain all the cart item that dont match the productId above, same thing as removing this from the cart
+    }
+  });
+  //  replace the cart above
+  cart = newCart;
 }
