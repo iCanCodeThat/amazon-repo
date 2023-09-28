@@ -1,3 +1,6 @@
+import { cart } from "../data/cart.js";  //  import the cart
+//  we can rename it such as "cart as myCart" to avoid naming conflict
+
 //  To Save the Data
 //  we will use an array because the data represents a list.
 //  Array
