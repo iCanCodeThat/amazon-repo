@@ -1,4 +1,5 @@
-import { cart } from "../data/cart.js";  //  import the cart
+import { cart, addToCart } from "../data/cart.js";  //  import the cart
+import { products } from "../data/products.js";
 //  we can rename it such as "cart as myCart" to avoid naming conflict
 
 //  To Save the Data
@@ -115,6 +116,38 @@ document.querySelector('.js-products-grid')
   .innerHTML = productsHTML;
 
 
+//  function that updates the cart quantity using DOM
+function updateCartQuantity(){
+  //  CALCULATE TOTAL QUANTITY
+  //  -   after we update our cart
+  //  -   we are going to calculate the total quantity
+
+  //  create variable to store the Total Quantity
+  let cartQuantity = 0;
+
+  //  - by looping through the cart
+  //  -   we are gonna add the myQuantity quantity to the cartQuantity
+  cart.forEach((cartItem)=>{
+    cartQuantity += cartItem.quantity;
+  });
+  console.log(cartQuantity);
+  /*
+    //  add the variable button to the cart
+    //  using push to add it on the cart array
+    //  we will push an object
+    cart.push({
+      productName: productName,
+      quantity: 1
+    });
+  */
+
+  //  Add the CartQuantity to the webpage by using DOM
+  document.querySelector('.js-cart-quantity')
+    .innerHTML = cartQuantity;
+  
+  console.log(cart);
+}
+
 //  ADD PRODUCTS TO THE CART
 //  instead of querySelector
 //  we will use querySelectorAll to give us the list of all the add to cart button in the page
@@ -125,56 +158,12 @@ document.querySelectorAll('.js-add-to-cart-button')
       //  gives us all the data attributes attached to a certain element
       const productId = button.dataset.productId;
       
-      //  variable to store the matching item
-      let matchingItem;
-
-      //  check if the productName is already in the cart
-      cart.forEach((item)=>{
-        if(productId === item.productId){
-          matchingItem = item;  //if we find a matching item, where gonna save it to the global variable
-        }
-      });
-      //  if we did find a matching item, it will be an object
-      //  which is a truthy value
-      if(matchingItem){
-        matchingItem.quantity+=1;
-      } //  if the product is not in the cart, we will add it on the cart
-      else {
-        cart.push({
-          //productId: productId,
-          productId,
-          quantity: 1
-        });
-      }
-
-      //  CALCULATE TOTAL QUANTITY
-      //  -   after we update our cart
-      //  -   we are going to calculate the total quantity
-
-      //  create variable to store the Total Quantity
-      let cartQuantity = 0;
-
-      //  - by looping through the cart
-      //  -   we are gonna add the myQuantity quantity to the cartQuantity
-      cart.forEach((myQuantity)=>{
-        cartQuantity += myQuantity.quantity;
-      });
-      console.log(cartQuantity);
-      /*
-        //  add the variable button to the cart
-        //  using push to add it on the cart array
-        //  we will push an object
-        cart.push({
-          productName: productName,
-          quantity: 1
-        });
-      */
-
-      //  Add the CartQuantity to the webpage by using DOM
-      document.querySelector('.js-cart-quantity')
-        .innerHTML = cartQuantity;
+      //  When we click add to cart where gonna run the add to cart function
+      addToCart(productId);
       
-      console.log(cart);
+      //  call the function here after we add a certain product to a cart
+      updateCartQuantity();
+      
     });
   });
 
