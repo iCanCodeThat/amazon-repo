@@ -31,6 +31,8 @@ export function addToCart(productId){
   }
 }
 
+
+//  Delete an Item
 export function removeProductFromCart(productId){  
   //  create new array
   const newCart = [];
